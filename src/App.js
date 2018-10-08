@@ -8,6 +8,7 @@ import "./App.css";
 //Components
 
 import AppNavbar from "./components/layout/AppNavbar";
+import { Dashboard } from "./components/layout/Dashboard";
 
 class App extends Component {
   render() {
@@ -17,7 +18,7 @@ class App extends Component {
           <React.Fragment>
             <Route component={AppNavbar} />
             <div className="container">
-              <h1>Hello There</h1>
+              <Route path="/" component={Dashboard} />
             </div>
           </React.Fragment>
         </Switch>
