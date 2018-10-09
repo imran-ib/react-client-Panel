@@ -6,7 +6,7 @@ export class SideBar extends Component {
     return (
       <div>
         <div>
-          <Link to="/new" className="btn btn-group-sm btn-success mt-2">
+          <Link to="/client/add" className="btn btn-group-sm btn-success mt-2">
             <i className="fas fa-plus mr-2" />
             New
           </Link>

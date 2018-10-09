@@ -5,22 +5,47 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import Spiner from "../layout/spiner";
 
-export class Clients extends Component {
-  render() {
-    const Clients = this.props.clients;
+class Clients extends Component {
+  state = {
+    totalOwed: 0
+  };
 
-    if (Clients) {
+  static getDerivedStateFromProps(props, state) {
+    const { clients } = props;
+    if (clients) {
+      const total = clients.reduce((total, client) => {
+        return total + parseFloat(client.Balance);
+      }, 0);
+
+      console.log(total);
+      return { totalOwed: total };
+    } else {
+      return state;
+    }
+  }
+
+  render() {
+    const { clients } = this.props;
+
+    if (clients) {
       return (
         <div>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <h2>
                 {" "}
                 <i className="fa fa-users" aria-hidden="true" /> Clients
               </h2>
             </div>
-            <div className="col-md-6" />
+            <div className="col-md-4" />
+            <h5 className="text-right">
+              Total Owed:{" "}
+              <span className="text-primary">
+                ${parseFloat(this.state.totalOwed)}
+              </span>
+            </h5>
           </div>
+
           <table className="table table-striped">
             <thead className="thead-inverse">
               <tr>
@@ -31,14 +56,14 @@ export class Clients extends Component {
               </tr>
             </thead>
             <tbody>
-              {Clients.map(client => {
+              {clients.map(client => {
                 return (
                   <tr key={client.id}>
                     <th scope="row">
                       {client.FirstName} {client.LastName}
                     </th>
                     <td>{client.Email}</td>
-                    <td>${parseFloat(client.Balance).toFixed(2)}</td>
+                    <td>${parseFloat(client.Balance)}</td>
                     <td>
                       <Link
                         className="btn btn-secondary btn-sm"

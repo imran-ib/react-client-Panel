@@ -4,7 +4,7 @@ import spiner from "../../assets/spinner.GIF";
 const Spiner = () => {
   return (
     <div>
-      <img src={spiner} alt="Loading..." style={{ width: "100px" }} />
+      <img src={spiner} alt="Loading..." style={{ width: "200px" , margin : "auto" , display:'block'}} />
     </div>
   );
 };
