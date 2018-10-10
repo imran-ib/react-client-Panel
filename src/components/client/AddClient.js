@@ -15,7 +15,6 @@ class AddClient extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.props);
 
     const newClient = this.state;
     const { history } = this.props;
