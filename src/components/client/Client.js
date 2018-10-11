@@ -17,7 +17,6 @@ class Clients extends Component {
         return total + parseFloat(client.Balance);
       }, 0);
 
-      console.log(total);
       return { totalOwed: total };
     } else {
       return state;
