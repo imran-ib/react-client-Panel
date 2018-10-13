@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import Spiner from "../layout/spiner";
+import { disableBalanceOnEdit } from "../actions/settingsActions";
 
 class EditClient extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class EditClient extends Component {
 
   render() {
     const { client } = this.props;
+    const { disableBalanceOnEdit } = this.props.settings;
     if (this.props.client) {
       return (
         <div>
@@ -112,6 +114,7 @@ class EditClient extends Component {
                         name="Balance"
                         ref={this.BlanceInput}
                         defaultValue={client.Balance}
+                        disabled={disableBalanceOnEdit}
                       />
                     </div>
 
@@ -135,7 +138,8 @@ export default compose(
   firestoreConnect(props => [
     { collection: "clients", storeAs: "client", doc: props.match.params.id }
   ]),
-  connect(({ firestore: { ordered } }, props) => ({
-    client: ordered.client && ordered.client[0]
+  connect(({ firestore: { ordered }, settings }, props) => ({
+    client: ordered.client && ordered.client[0],
+    settings
   }))
 )(EditClient);

@@ -1,4 +1,4 @@
-import { NOTIFY_USER } from "../actions/actionType";
+import { NOTIFY_USER } from "../actions/types";
 
 const initialState = {
   Message: null,

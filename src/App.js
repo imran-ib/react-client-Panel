@@ -17,6 +17,8 @@ import AddClient from "./components/client/AddClient";
 import Details from "./components/client/Detail";
 import EditForm from "./components/client/EditForm";
 import Login from "./components/auth/Login";
+import settings from "./components/settings/Settings";
+import Register from "./components/auth/Register";
 
 class App extends Component {
   render() {
@@ -48,8 +50,18 @@ class App extends Component {
               />
               <Route
                 exact
+                path="/settings"
+                component={UserIsAuthenticated(settings)}
+              />
+              <Route
+                exact
                 path="/login"
                 component={UserIsNotAuthenticated(Login)}
+              />
+              <Route
+                exact
+                path="/register"
+                component={UserIsNotAuthenticated(Register)}
               />
             </div>
           </React.Fragment>

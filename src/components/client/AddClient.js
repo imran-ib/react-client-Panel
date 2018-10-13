@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-//import { connect } from "react-redux";
-//import { compose } from "redux";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 class AddClient extends Component {
@@ -36,6 +36,7 @@ class AddClient extends Component {
 
   render() {
     const { FirstName, LastName, Email, Phone, Balance } = this.state;
+    const { disableBalanceOnAdd } = this.props.settings;
     return (
       <div>
         <div className="mb-3 mt-3">
@@ -108,6 +109,7 @@ class AddClient extends Component {
                       name="Balance"
                       value={Balance}
                       onChange={this.onChange}
+                      disabled={disableBalanceOnAdd}
                     />
                   </div>
 
@@ -124,4 +126,9 @@ class AddClient extends Component {
   }
 }
 
-export default firestoreConnect()(AddClient);
+export default compose(
+  firestoreConnect(),
+  connect((state, props) => ({
+    settings: state.settings
+  }))
+)(AddClient);

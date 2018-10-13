@@ -25,6 +25,7 @@ export class Navbar extends Component {
   };
 
   render() {
+    const { allowRegistration } = this.props.settings;
     return (
       <div>
         <nav className=" navbar navbar-expand-lg navbar-dark bg-primary">
@@ -48,7 +49,7 @@ export class Navbar extends Component {
                 <ul className="navbar-nav">
                   <li className="nav-item active">
                     <Link className="nav-link" to="/">
-                      Dashboard <span className="sr-only">(current)</span>
+                      Dashboard
                     </Link>
                   </li>
                 </ul>
@@ -61,6 +62,12 @@ export class Navbar extends Component {
                     </a>
                   </li>
 
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/settings">
+                      Setings
+                    </Link>
+                  </li>
+
                   <li className="nav-item ">
                     <a
                       className="nav-link"
@@ -69,6 +76,22 @@ export class Navbar extends Component {
                     >
                       LogOut
                     </a>
+                  </li>
+                </ul>
+              ) : null}
+
+              {allowRegistration && !this.state.isAuthenticated ? (
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      Login
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                      Register
+                    </Link>
                   </li>
                 </ul>
               ) : null}
@@ -83,6 +106,7 @@ export class Navbar extends Component {
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    settings: state.settings
   }))
 )(Navbar);

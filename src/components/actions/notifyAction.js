@@ -1,4 +1,4 @@
-import { NOTIFY_USER } from "./actionType";
+import { NOTIFY_USER } from "./types";
 
 export const notifyAction = (Message, MessageType) => {
   return {
